@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 
 namespace RefactoringKata
 {
-    public class Orders
+    public class Orders 
     {
         private List<Order> _orders = new List<Order>();
 
@@ -20,5 +21,8 @@ namespace RefactoringKata
         {
             return _orders[i];
         }
+
+        
+ 
     }
 }
