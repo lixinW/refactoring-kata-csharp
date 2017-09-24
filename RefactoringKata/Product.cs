@@ -16,6 +16,7 @@ namespace RefactoringKata
         public double Price { get; set; }
         public string Currency { get; set; }
 
+        private ProductAttributesJsonWrapper _ProductJsonFormat = new ProductAttributesJsonWrapper(); 
         public Product(string code, Color color, Size size, double price, string currency)
         {
             Code = code;
@@ -35,12 +36,12 @@ namespace RefactoringKata
                 {"price",Price.ToString(CultureInfo.InvariantCulture)},
                 {"currency",Currency}
             };
-            return GetJsonFormatFromProperty(_JsonDisplayProperties);
+            return GetJsonFormatFromProperty();
         }
 
-        private StringBuilder GetJsonFormatFromProperty(Dictionary<string, string> JsonDisplayProperties)
+        private StringBuilder GetJsonFormatFromProperty()
         {
-            return StringBuilderWrapper.WrapWithCurelyBracket( GetProductInfoJson());
+            return _ProductJsonFormat.WrapWithCurelyBracket(GetProductInfoJson());
         }
 
         private StringBuilder GetProductInfoJson()
@@ -53,19 +54,19 @@ namespace RefactoringKata
             return sb;
         }
 
-        private static void GetProductAttributeJson(Dictionary<string, string> JsonDisplayProperties, KeyValuePair<string, string> kv, StringBuilder sb)
+        private void GetProductAttributeJson(Dictionary<string, string> JsonDisplayProperties, KeyValuePair<string, string> kv, StringBuilder sb)
         {
             if (kv.Value == Size.SIZE_NOT_APPLICABLE.ToString())
                 return;
 
-            StringBuilderWrapper.WrapPropertyKey(sb, kv.Key);
+            _ProductJsonFormat.WrapPropertyKey(sb, kv.Key);
 
             if (IsLastAttribute(JsonDisplayProperties, kv))
             {
-                StringBuilderWrapper.WrapLastAttribute(sb, kv);
+                _ProductJsonFormat.WrapLastAttribute(sb, kv);
                 return;
             }
-            StringBuilderWrapper.WrapProperyValue(sb, kv.Value);
+            _ProductJsonFormat.WrapProperyValue(sb, kv.Value);
         }
 
         private static bool IsLastAttribute(Dictionary<string, string> JsonDisplayProperties, KeyValuePair<string, string> kv)

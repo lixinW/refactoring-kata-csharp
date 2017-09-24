@@ -13,19 +13,7 @@ namespace RefactoringKata
 
         public string GetContents()
         {
-            var sb = new StringBuilder("{\"orders\": [");
-            for (var i = 0; i < _orders.GetOrdersCount(); i++)
-            {
-                var order = _orders.GetOrder(i);
-                order.GetOrderInfoJson(i, sb);
-            }
-
-            if (_orders.GetOrdersCount() > 0)
-            {
-                sb.Remove(sb.Length - 2, 2);
-            }
-
-            return sb.Append("]}").ToString();
+            return _orders.GetOrdersJson();
         }
     }
 }

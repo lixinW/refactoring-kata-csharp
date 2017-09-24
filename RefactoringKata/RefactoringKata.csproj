@@ -51,6 +51,9 @@
   <ItemGroup>
     <Compile Include="Enums\Color.cs" />
     <Compile Include="Enums\Size.cs" />
+    <Compile Include="Helper\OrderAttribuitesJsonWrapper.cs" />
+    <Compile Include="Helper\OrdersAttributeJsonWrapper.cs" />
+    <Compile Include="Helper\ProductAttributesJsonWrapper.cs" />
     <Compile Include="Helper\StringBuilderWrapper.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="Orders.cs" />
